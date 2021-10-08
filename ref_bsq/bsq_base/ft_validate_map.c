@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_validate_map.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: louisnop <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: HINATA <HINATA@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 22:48:35 by louisnop          #+#    #+#             */
-/*   Updated: 2020/01/30 07:19:14 by louisnop         ###   ########.fr       */
+/*   Updated: 2021/10/08 11:36:27 by HINATA           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
-int		ft_validate_1(char **map, t_info *info)
+int		ft_validate_simple(char **map, t_info *info)
 {
 	if (!(map[0] && map[1]))
 		return (FAIL);
 	if (!(map[1][0] == info->empty ||
-			map[1][0] == info->obstacle ||
-			map[1][0] == info->full))
+		map[1][0] == info->obstacle ||
+		map[1][0] == info->full))
 		return (FAIL);
 	return (SUCCESS);
 }
 
-int		ft_validate_2(char **map, t_info *info)
+int		ft_validate_empty_or_obstacle(char **map, t_info *info)
 {
 	int i;
 	int j;
@@ -41,7 +41,7 @@ int		ft_validate_2(char **map, t_info *info)
 	return (SUCCESS);
 }
 
-int		ft_validate_3(char **map, t_info *info)
+int		ft_validate_size(char **map, t_info *info)
 {
 	int i;
 	int len;
@@ -59,7 +59,7 @@ int		ft_validate_3(char **map, t_info *info)
 	return (SUCCESS);
 }
 
-int		ft_validate_4(char *content)
+int		ft_validate_end_newline(char *content)
 {
 	int		i;
 
@@ -73,11 +73,11 @@ int		ft_validate_4(char *content)
 
 int		ft_validate(char **map, t_info *info)
 {
-	if (ft_validate_1(map, info) == FAIL)
+	if (ft_validate_simple(map, info) == FAIL)
 		return (FAIL);
-	if (ft_validate_2(map, info) == FAIL)
+	if (ft_validate_empty_or_obstacle(map, info) == FAIL)
 		return (FAIL);
-	if (ft_validate_3(map, info) == FAIL)
+	if (ft_validate_size(map, info) == FAIL)
 		return (FAIL);
 	return (SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpmakesquare.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: louisnop <louisnop@student.42.fr>          +#+  +:+       +#+        */
+/*   By: HINATA <HINATA@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 21:46:00 by louisnop          #+#    #+#             */
-/*   Updated: 2020/01/30 02:37:11 by louisnop         ###   ########.fr       */
+/*   Updated: 2021/10/08 11:11:59 by HINATA           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,21 @@ void	set_tempcrs(t_tempcrs *p_tempcrs)
 	p_tempcrs->size = 0;
 }
 
-int		ft_check_1(char **map, int col, int row, t_info *p_info)
+int		ft_check_map_edge(char **map, int col, int row, t_info *p_info)
 {
 	if (col == ft_map_colsize(map))
 	{
-		return (0);
+		return (FAIL);
 	}
 	if (row == p_info->num_rows + 1)
 	{
-		return (0);
+		return (FAIL);
 	}
 	if (map[row][col] == p_info->obstacle || map[row][col] == '\0')
 	{
-		return (0);
+		return (FAIL);
 	}
-	return (1);
+	return (SUCCESS);
 }
 
 void	set_bsq(t_bsq *p_bsq)

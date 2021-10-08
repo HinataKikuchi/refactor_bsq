@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_info.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: louisnop <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: HINATA <HINATA@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 22:47:47 by louisnop          #+#    #+#             */
-/*   Updated: 2020/01/30 06:37:38 by louisnop         ###   ########.fr       */
+/*   Updated: 2021/10/07 16:18:43 by HINATA           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
-int		ft_validate_5(char **map)
+int		ft_validate_map(char **map)
 {
 	int		len;
 	char	*line;

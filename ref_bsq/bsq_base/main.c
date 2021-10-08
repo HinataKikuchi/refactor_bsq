@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: louisnop <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: HINATA <HINATA@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:58:38 by louisnop          #+#    #+#             */
-/*   Updated: 2020/01/30 08:13:14 by louisnop         ###   ########.fr       */
+/*   Updated: 2021/10/08 11:22:48 by HINATA           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,18 @@ char	*ft_read(int ifd)
 	return (content);
 }
 
-int		ft_main_1(void)
+int		ft_load_std_input(void)
 {
 	char	*content;
 	char	**map;
 	t_info	*info;
 
 	content = ft_read(0);
-	if (ft_validate_4(content) == FAIL)
+	if (ft_validate_end_newline(content) == FAIL)
 		return (FAIL);
 	map = ft_split(content, "\n");
 	free(content);
-	if (ft_validate_5(map) == FAIL)
+	if (ft_validate_map(map) == FAIL)
 		return (FAIL);
 	if (!(info = ft_prse(map)))
 		return (FAIL);
@@ -67,7 +67,7 @@ int		ft_main_1(void)
 	return (SUCCESS);
 }
 
-int		ft_main_2(int argc, char *argv[], int i)
+int		ft_load_file_input(int argc, char *argv[], int i)
 {
 	int		ifd;
 	char	*content;
@@ -77,12 +77,12 @@ int		ft_main_2(int argc, char *argv[], int i)
 	if ((ifd = open(argv[i], O_RDONLY)) == -1)
 		return (FAIL);
 	content = ft_read(ifd);
-	if (ft_validate_4(content) == FAIL)
+	if (ft_validate_end_newline(content) == FAIL)
 		return (FAIL);
 	close(ifd);
 	map = ft_split(content, "\n");
 	free(content);
-	if (ft_validate_5(map) == FAIL)
+	if (ft_validate_map(map) == FAIL)
 		return (FAIL);
 	if (!(info = ft_prse(map)))
 		return (FAIL);
@@ -102,7 +102,7 @@ int		main(int argc, char *argv[])
 
 	if (argc < 2)
 	{
-		if (ft_main_1() == FAIL)
+		if (ft_load_std_input() == FAIL)
 			ft_puterror(FT_ERR_MAP);
 	}
 	else
@@ -110,7 +110,7 @@ int		main(int argc, char *argv[])
 		i = 0;
 		while (++i < argc)
 		{
-			if (ft_main_2(argc, argv, i) == FAIL)
+			if (ft_load_file_input(argc, argv, i) == FAIL)
 				ft_puterror(FT_ERR_MAP);
 		}
 	}

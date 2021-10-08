@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   makesquare2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: louisnop <louisnop@student.42.fr>          +#+  +:+       +#+        */
+/*   By: HINATA <HINATA@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 21:46:00 by louisnop          #+#    #+#             */
-/*   Updated: 2020/01/30 02:37:11 by louisnop         ###   ########.fr       */
+/*   Updated: 2021/10/08 11:19:45 by HINATA           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,35 @@ extern	int g_max;
 extern	int g_col;
 extern	int g_row;
 
-int		ft_check_2(char **map, t_tempcrs *p_tempcrs, t_info *p_info)
+int		ft_check_vertical_and_horizen_edge(char **map, t_tempcrs *p_tempcrs, t_info *p_info)
 {
 	int i;
 
 	i = 0;
 	while (i <= p_tempcrs->size)
 	{
-		if (ft_check_1(map, p_tempcrs->col + i,
-		p_tempcrs->row + p_tempcrs->size, p_info) == 0)
+		if (ft_check_map_edge(map, p_tempcrs->col + i,
+		p_tempcrs->row + p_tempcrs->size, p_info) == FAIL)
 		{
-			return (0);
+			return (FAIL);
 		}
 		i++;
 	}
 	i = 0;
 	while (i <= p_tempcrs->size)
 	{
-		if (ft_check_1(map, p_tempcrs->col + p_tempcrs->size,
-		p_tempcrs->row + i, p_info) == 0)
-			return (0);
+		if (ft_check_map_edge(map, p_tempcrs->col + p_tempcrs->size,
+		p_tempcrs->row + i, p_info) == FAIL)
+			return (FAIL);
 		i++;
 	}
-	return (1);
+	return (SUCCESS);
 }
 
-void	ft_check_3(char **map, t_tempcrs *p_tempcrs, t_info *p_info)
+void	ft_check_maximum_size(char **map, t_tempcrs *p_tempcrs, t_info *p_info)
 {
 	p_tempcrs->size = 0;
-	while (ft_check_2(map, p_tempcrs, p_info) == 1)
+	while (ft_check_vertical_and_horizen_edge(map, p_tempcrs, p_info) == 1)
 	{
 		p_tempcrs->size++;
 	}
@@ -113,10 +113,10 @@ void	ft_make_map(char **map, t_info *p_info)
 		p_tempcrs->col = 0;
 		while (p_tempcrs->col < ft_map_colsize(map))
 		{
-			if (ft_check_1(map, p_tempcrs->col,
+			if (ft_check_map_edge(map, p_tempcrs->col,
 			p_tempcrs->row, p_info) == 1)
 			{
-				ft_check_3(map, p_tempcrs, p_info);
+				ft_check_maximum_size(map, p_tempcrs, p_info);
 			}
 			p_tempcrs->col++;
 		}
